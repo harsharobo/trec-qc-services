@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message QuestionDetails{
+  string question = 1;
+  string questionClass = 2;
+}
+
+message QuestionPOSTagging{
+  QuestionDetails questionDetails =1;
+  string taggedQuestion = 2;
+  repeated string tagSequence = 3;
+}
+
+message GetQuestionsMessage{
+  int32 limit = 1;
+  repeated QuestionDetails questionDetailsList=2;
+}
+
+service QuestionClassificationServices{
+  rpc getSampleQuestions(GetQuestionsMessage) returns (GetQuestionsMessage);
+  rpc getTaggedQuestions(QuestionPOSTagging) returns (QuestionPOSTagging);
+}

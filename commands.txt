@@ -1,0 +1,1 @@
+python -m grpc_tools.protoc -I protos --python_out=proto_generated --grpc_python_out=proto_generated protos/sample_service.proto

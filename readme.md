@@ -1,0 +1,3 @@
+This is a learning project to build a gRPC services encapsulating the NLP processing on the text data-set.
+
+More details to be updated......
