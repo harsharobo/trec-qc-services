@@ -4,25 +4,26 @@ services:
     image: trec-qc-grpc:latest
     volumes:
       - /var/log:/var/log
-    ports:
-      target: 50051
-      published: 50051
-      protocol: tcp
-      mode: ingress
     deploy:
       mode: replicated
       replicas: 2
+      endpoint_mode: dnsrr
+    networks:
+      - qcnetwork
     command: nohup python -u StartGrpcSampleService.py > /var/log/qc-server-${HOSTNAME}.log 2>&1 &
   qc-client:
     image: trec-qc-grpc:latest
+    depends_on:
+      - qc-server
     volumes:
       - /var/log:/var/log
     environment:
       QC-SERVER-DNS: "qc-server"
     deploy:
       mode: global
+    networks:
+      - qcnetwork
     command: nohup python -u StartGrpcSampleClient.py > /var/log/qc-client-${HOSTNAME}.log 2>&1 &
-  networks:
-    default:
-      external:
-        name: application
+networks:
+  qcnetwork:
+    driver: overlay

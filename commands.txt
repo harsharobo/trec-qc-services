@@ -1,6 +1,8 @@
 Proto generated objects:
 python -m grpc_tools.protoc -I protos --python_out=proto_generated --grpc_python_out=proto_generated protos/sample_service.proto
 
-Docker Commands:
-1) docker image build -t trec-qc-grpc -f Dockerfile .
-2) docker run --name trec-qc-grpc-1 -p 50051:50051 -d trec-qc-grpc:latest
+Docker build command:
+docker image build -t trec-qc-grpc -f Dockerfile .
+
+Docker service deploy command:
+docker stack deploy --compose-file docker-compose.yml qcdemo
