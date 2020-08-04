@@ -1,13 +1,13 @@
 Proto generated objects:
 python -m grpc_tools.protoc -I protos --python_out=proto_generated --grpc_python_out=proto_generated protos/sample_service.proto
 
+Bootstrap:
+sudo mkdir /var/log/nginx
+sudo mkdir /var/log/qcservice
+mv trec-qc-services/nginx /etc/
+
 Docker build command:
 docker image build -t trec-qc-grpc -f Dockerfile .
 
 Docker service deploy command:
 docker stack deploy --compose-file docker-compose.yml qcdemo
-
-sudo mkdir /var/log/nginx
-sudo mkdir /var/log/qcservice
-mv trec-qc-services/Dockerfile trec-qc-services/docker-compose.xml ./
-mv trec-qc-services/nginx /etc/
