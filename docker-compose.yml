@@ -35,7 +35,7 @@ services:
     volumes:
       - /var/log/qcservice:/var/log/qcservice
     environment:
-      QC-SERVER-DNS: "localhost"
+      QC-SERVER-DNS: "${HOSTNAME}"
       QC-SERVER-PORT: "9005"
     deploy:
       mode: global

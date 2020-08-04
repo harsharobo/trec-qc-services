@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x14sample_service.proto\":\n\x0fQuestionDetails\x12\x10\n\x08question\x18\x01 \x01(\t\x12\x15\n\rquestionClass\x18\x02 \x01(\t\"l\n\x12QuestionPOSTagging\x12)\n\x0fquestionDetails\x18\x01 \x01(\x0b\x32\x10.QuestionDetails\x12\x16\n\x0etaggedQuestion\x18\x02 \x01(\t\x12\x13\n\x0btagSequence\x18\x03 \x03(\t\"S\n\x13GetQuestionsMessage\x12\r\n\x05limit\x18\x01 \x01(\x05\x12-\n\x13questionDetailsList\x18\x02 \x03(\x0b\x32\x10.QuestionDetails2\xa2\x01\n\x1eQuestionClassificationServices\x12@\n\x12getSampleQuestions\x12\x14.GetQuestionsMessage\x1a\x14.GetQuestionsMessage\x12>\n\x12getTaggedQuestions\x12\x13.QuestionPOSTagging\x1a\x13.QuestionPOSTaggingb\x06proto3'
+  serialized_pb=b'\n\x14sample_service.proto\":\n\x0fQuestionDetails\x12\x10\n\x08question\x18\x01 \x01(\t\x12\x15\n\rquestionClass\x18\x02 \x01(\t\"l\n\x12QuestionPOSTagging\x12)\n\x0fquestionDetails\x18\x01 \x01(\x0b\x32\x10.QuestionDetails\x12\x16\n\x0etaggedQuestion\x18\x02 \x01(\t\x12\x13\n\x0btagSequence\x18\x03 \x03(\t\"x\n\x13GetQuestionsMessage\x12\r\n\x05limit\x18\x01 \x01(\x05\x12-\n\x13questionDetailsList\x18\x02 \x03(\x0b\x32\x10.QuestionDetails\x12\x11\n\trequestId\x18\x03 \x01(\t\x12\x10\n\x08\x66romHost\x18\x04 \x01(\t2\xeb\x01\n\x1eQuestionClassificationServices\x12@\n\x12getSampleQuestions\x12\x14.GetQuestionsMessage\x1a\x14.GetQuestionsMessage\x12G\n\x15streamSampleQuestions\x12\x14.GetQuestionsMessage\x1a\x14.GetQuestionsMessage(\x01\x30\x01\x12>\n\x12getTaggedQuestions\x12\x13.QuestionPOSTagging\x1a\x13.QuestionPOSTaggingb\x06proto3'
 )
 
 
@@ -132,6 +132,20 @@ _GETQUESTIONSMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='requestId', full_name='GetQuestionsMessage.requestId', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fromHost', full_name='GetQuestionsMessage.fromHost', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -145,7 +159,7 @@ _GETQUESTIONSMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=194,
-  serialized_end=277,
+  serialized_end=314,
 )
 
 _QUESTIONPOSTAGGING.fields_by_name['questionDetails'].message_type = _QUESTIONDETAILS
@@ -185,8 +199,8 @@ _QUESTIONCLASSIFICATIONSERVICES = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=280,
-  serialized_end=442,
+  serialized_start=317,
+  serialized_end=552,
   methods=[
   _descriptor.MethodDescriptor(
     name='getSampleQuestions',
@@ -199,9 +213,19 @@ _QUESTIONCLASSIFICATIONSERVICES = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='streamSampleQuestions',
+    full_name='QuestionClassificationServices.streamSampleQuestions',
+    index=1,
+    containing_service=None,
+    input_type=_GETQUESTIONSMESSAGE,
+    output_type=_GETQUESTIONSMESSAGE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='getTaggedQuestions',
     full_name='QuestionClassificationServices.getTaggedQuestions',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_QUESTIONPOSTAGGING,
     output_type=_QUESTIONPOSTAGGING,

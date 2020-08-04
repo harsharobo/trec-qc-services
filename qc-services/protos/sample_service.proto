@@ -14,9 +14,12 @@ message QuestionPOSTagging{
 message GetQuestionsMessage{
   int32 limit = 1;
   repeated QuestionDetails questionDetailsList=2;
+  string requestId = 3;
+  string fromHost = 4;
 }
 
 service QuestionClassificationServices{
   rpc getSampleQuestions(GetQuestionsMessage) returns (GetQuestionsMessage);
+  rpc streamSampleQuestions(stream GetQuestionsMessage) returns (stream GetQuestionsMessage);
   rpc getTaggedQuestions(QuestionPOSTagging) returns (QuestionPOSTagging);
 }

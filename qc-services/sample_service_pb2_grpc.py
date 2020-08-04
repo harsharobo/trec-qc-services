@@ -19,6 +19,11 @@ class QuestionClassificationServicesStub(object):
                 request_serializer=sample__service__pb2.GetQuestionsMessage.SerializeToString,
                 response_deserializer=sample__service__pb2.GetQuestionsMessage.FromString,
                 )
+        self.streamSampleQuestions = channel.stream_stream(
+                '/QuestionClassificationServices/streamSampleQuestions',
+                request_serializer=sample__service__pb2.GetQuestionsMessage.SerializeToString,
+                response_deserializer=sample__service__pb2.GetQuestionsMessage.FromString,
+                )
         self.getTaggedQuestions = channel.unary_unary(
                 '/QuestionClassificationServices/getTaggedQuestions',
                 request_serializer=sample__service__pb2.QuestionPOSTagging.SerializeToString,
@@ -35,6 +40,12 @@ class QuestionClassificationServicesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def streamSampleQuestions(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def getTaggedQuestions(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -46,6 +57,11 @@ def add_QuestionClassificationServicesServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'getSampleQuestions': grpc.unary_unary_rpc_method_handler(
                     servicer.getSampleQuestions,
+                    request_deserializer=sample__service__pb2.GetQuestionsMessage.FromString,
+                    response_serializer=sample__service__pb2.GetQuestionsMessage.SerializeToString,
+            ),
+            'streamSampleQuestions': grpc.stream_stream_rpc_method_handler(
+                    servicer.streamSampleQuestions,
                     request_deserializer=sample__service__pb2.GetQuestionsMessage.FromString,
                     response_serializer=sample__service__pb2.GetQuestionsMessage.SerializeToString,
             ),
@@ -75,6 +91,22 @@ class QuestionClassificationServices(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/QuestionClassificationServices/getSampleQuestions',
+            sample__service__pb2.GetQuestionsMessage.SerializeToString,
+            sample__service__pb2.GetQuestionsMessage.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def streamSampleQuestions(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/QuestionClassificationServices/streamSampleQuestions',
             sample__service__pb2.GetQuestionsMessage.SerializeToString,
             sample__service__pb2.GetQuestionsMessage.FromString,
             options, channel_credentials,

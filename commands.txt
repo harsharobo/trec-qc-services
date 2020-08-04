@@ -1,10 +1,10 @@
 Proto generated objects:
-python -m grpc_tools.protoc -I protos --python_out=qc-services --grpc_python_out=qc-services qc-services/protos/sample_service.proto
+python -m grpc_tools.protoc -I qc-services/protos --python_out=qc-services --grpc_python_out=qc-services qc-services/protos/sample_service.proto
 
 Bootstrap:
 sudo mkdir /var/log/nginx
 sudo mkdir /var/log/qcservice
-mv trec-qc-services/nginx /etc/
+sudo cp -avr nginx /etc/
 
 Docker build command:
 docker image build -t trec-qc-grpc -f Dockerfile .
