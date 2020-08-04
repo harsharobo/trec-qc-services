@@ -1,5 +1,19 @@
 version: "3.4"
 services:
+  nginx:
+    image: nginx:1.19.1
+    volumes:
+      - nginx/conf.d:/etc/nginx/conf.d
+      - nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /var/log/nginx:/var/log/nginx
+    ports:
+      - target: 50051
+        published: 50051
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+    command: /bin/bash -c "exec nginx -g 'daemon off;'"
   qc-server:
     image: trec-qc-grpc:latest
     volumes:
