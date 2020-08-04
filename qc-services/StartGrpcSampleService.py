@@ -1,7 +1,7 @@
 from concurrent import futures
 import grpc
-import proto_generated.sample_service_pb2 as service_objects
-import proto_generated.sample_service_pb2_grpc as service_stub
+import sample_service_pb2 as service_objects
+import sample_service_pb2_grpc as service_stub
 
 
 class SampleServiceImpl(service_stub.QuestionClassificationServicesServicer):

@@ -2,8 +2,8 @@ import grpc
 import time
 import os
 
-import proto_generated.sample_service_pb2 as service_objects
-import proto_generated.sample_service_pb2_grpc as service_stub
+import sample_service_pb2 as service_objects
+import sample_service_pb2_grpc as service_stub
 
 
 def run(channel):
@@ -15,8 +15,9 @@ def run(channel):
 
 if __name__ == "__main__":
     host = os.getenv('QC-SERVER-DNS', '127.0.0.1')
+    port = os.getenv('QC-SERVER-PORT', '50051')
     print('connecting to host ', host)
-    with grpc.insecure_channel(host+':9005') as channel:
+    with grpc.insecure_channel(host+':'+port) as channel:
         while True:
             run(channel)
             time.sleep(1.5)

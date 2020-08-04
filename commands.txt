@@ -1,5 +1,5 @@
 Proto generated objects:
-python -m grpc_tools.protoc -I protos --python_out=proto_generated --grpc_python_out=proto_generated protos/sample_service.proto
+python -m grpc_tools.protoc -I protos --python_out=qc-services --grpc_python_out=qc-services qc-services/protos/sample_service.proto
 
 Bootstrap:
 sudo mkdir /var/log/nginx
