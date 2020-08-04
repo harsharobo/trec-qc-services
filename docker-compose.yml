@@ -3,25 +3,26 @@ services:
   nginx:
     image: nginx:1.19.1
     volumes:
-      - nginx/conf.d:/etc/nginx/conf.d
-      - nginx/nginx.conf:/etc/nginx/nginx.conf
+      - "$(pwd)"/nginx/conf.d:/etc/nginx/conf.d
+      - "$(pwd)"/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /var/log/nginx:/var/log/nginx
     ports:
-      - target: 50051
-        published: 50051
+      - target: 9005
+        published: 9005
         protocol: tcp
         mode: ingress
     deploy:
       mode: replicated
+    networks:
+      - qcnetwork
     command: /bin/bash -c "exec nginx -g 'daemon off;'"
   qc-server:
     image: trec-qc-grpc:latest
     volumes:
-      - /var/log:/var/log
+      - /var/log/qcservice:/var/log/qcservice
     deploy:
       mode: replicated
       replicas: 2
-      endpoint_mode: dnsrr
     networks:
       - qcnetwork
     command: nohup python -u StartGrpcSampleService.py > /var/log/qc-server-${HOSTNAME}.log 2>&1 &
@@ -30,9 +31,9 @@ services:
     depends_on:
       - qc-server
     volumes:
-      - /var/log:/var/log
+      - /var/log/qcservice:/var/log/qcservice
     environment:
-      QC-SERVER-DNS: "qc-server"
+      QC-SERVER-DNS: "nginx"
     deploy:
       mode: global
     networks:

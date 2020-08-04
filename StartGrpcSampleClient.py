@@ -16,7 +16,7 @@ def run(channel):
 if __name__ == "__main__":
     host = os.getenv('QC-SERVER-DNS', '127.0.0.1')
     print('connecting to host ', host)
-    with grpc.insecure_channel(host+':50051') as channel:
+    with grpc.insecure_channel(host+':9005') as channel:
         while True:
             run(channel)
             time.sleep(1.5)
