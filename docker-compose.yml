@@ -2,9 +2,11 @@ version: "3.4"
 services:
   nginx:
     image: nginx:1.19.1
+    depends_on:
+      - qc-server
     volumes:
-      - "$(pwd)"/nginx/conf.d:/etc/nginx/conf.d
-      - "$(pwd)"/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/nginx/conf.d:/etc/nginx/conf.d
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /var/log/nginx:/var/log/nginx
     ports:
       - target: 9005
@@ -29,11 +31,11 @@ services:
   qc-client:
     image: trec-qc-grpc:latest
     depends_on:
-      - qc-server
+      - nginx
     volumes:
       - /var/log/qcservice:/var/log/qcservice
     environment:
-      QC-SERVER-DNS: "nginx"
+      QC-SERVER-DNS: "localhost"
     deploy:
       mode: global
     networks:
