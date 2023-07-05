@@ -1,4 +1,4 @@
-grpcio==1.30.0
+grpcio==1.53.0
 grpcio-tools==1.30.0
 gensim==3.8.0
 spacy==2.3.2
